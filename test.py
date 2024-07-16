@@ -1,6 +1,8 @@
 import random
 import numpy as np
+import matplotlib.pyplot as plt
 
-list = [2, 3, 4, 5, 6, 7, 8, 9, 10]
-count = 
-print(count)
+for age in range(18,80):
+    ratio_adjustment = (age - 18) / (80 - 18) 
+    plt.scatter(age, ratio_adjustment, color="red")
+plt.show()
