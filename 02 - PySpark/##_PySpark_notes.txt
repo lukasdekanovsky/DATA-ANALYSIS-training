@@ -26,4 +26,14 @@ INTRODUCTION Apache Spark
 
 3) CHECKING DATATYPES    
     - checking a datatypes                  - df_pyspark.dtypes
-    
+                                            - df_pyspark.describe()
+
+4) ADDING COLUMNS              
+    - add column                            - df_pyspark.withColumn("new_column_name", some mathematical operation)
+    - drop column                           - df_pyspark.drop("column_name")
+
+5) RENAME COLUMN 
+    - rename                                - df_pyspark.withColumnRenamed("old_name", "new_name")
+
+6) HANDLING MISSING VALUES
+    - 

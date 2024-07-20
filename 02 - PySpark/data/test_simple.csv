@@ -1,5 +1,10 @@
-﻿Name;age
-Lukas;30
-Katerina;26
-Petra;40
-Pavel;45
+﻿name;age;experience;salary
+Lukas;30;10;45000
+Katerina;26;8;34000
+Petra;40;4;24000
+Pavel;45;3;20000
+Kuba;21;1;15000
+Julie;;;40000
+Tonda;34;2;40500
+;26;10;38000
+;19;;
