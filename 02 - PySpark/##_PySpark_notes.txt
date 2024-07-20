@@ -1,0 +1,29 @@
+INTRODUCTION PySpark
+-   PySpark is interface for Apache Spark in python 
+-   Used for large data processing and machine learning
+-   For huge amount of data (128 GB)
+
+INTRODUCTION Apache Spark
+-   Apache Spark is a multi-language engine for executing data science and ML on single node machines or clusetres
+-   Using for larg scale data processing
+-   Its really fast
+
+1) WORKFLOW BASIC 
+    - import module             - import pyspark 
+    - start a Spark session     - from pyspark.sql import SparkSession
+                                - spark = SparkSession.builder.appName("test").getOrCreate()
+                                - spark
+    - read dataset  opt. 1      - df_pyspark = spark.read.csv("path", header=True, inferSchema=True, spe=";")
+    - read dataset  opt. 2      - df_pyspark = spark.read.option("header", "true").csv("path")
+    - show dataset              - df_pyspark.show()
+    - basic investigation       - df_pyspark.head() 
+                                - df_pyspark.printSchema()   -> info about datatypes (int, str... in columns)
+                                - df_pyspark.select("column").show()
+
+2) SELECTING COLUMNS AND INDEXING
+    - selecting the column heads            - df_pyspark.columns
+    - selecting just specific columns       - df_pyspark.select(["column_name", "column2_name"])
+
+3) CHECKING DATATYPES    
+    - checking a datatypes                  - df_pyspark.dtypes
+    
