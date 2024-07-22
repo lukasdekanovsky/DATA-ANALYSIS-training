@@ -13,27 +13,41 @@ INTRODUCTION Apache Spark
     - start a Spark session     - from pyspark.sql import SparkSession
                                 - spark = SparkSession.builder.appName("test").getOrCreate()
                                 - spark
-    - read dataset  opt. 1      - df_pyspark = spark.read.csv("path", header=True, inferSchema=True, spe=";")
-    - read dataset  opt. 2      - df_pyspark = spark.read.option("header", "true").csv("path")
-    - show dataset              - df_pyspark.show()
-    - basic investigation       - df_pyspark.head() 
-                                - df_pyspark.printSchema()   -> info about datatypes (int, str... in columns)
-                                - df_pyspark.select("column").show()
+    - read dataset  opt. 1      - dataframe = spark.read.csv("path", header=True, inferSchema=True, spe=";")
+    - read dataset  opt. 2      - dataframe = spark.read.option("header", "true").csv("path")
+    - show dataset              - dataframe.show()
+    - basic investigation       - dataframe.head() 
+                                - dataframe.printSchema()   -> info about datatypes (int, str... in columns)
+                                - dataframe.select("column").show()
 
 2) SELECTING COLUMNS AND INDEXING
-    - selecting the column heads            - df_pyspark.columns
-    - selecting just specific columns       - df_pyspark.select(["column_name", "column2_name"])
+    - selecting the column heads            - dataframe.columns
+    - selecting just specific columns       - dataframe.select(["column_name", "column2_name"])
 
 3) CHECKING DATATYPES    
-    - checking a datatypes                  - df_pyspark.dtypes
-                                            - df_pyspark.describe()
+    - checking a datatypes                  - dataframe.dtypes
+                                            - dataframe.describe()
 
 4) ADDING COLUMNS              
-    - add column                            - df_pyspark.withColumn("new_column_name", some mathematical operation)
-    - drop column                           - df_pyspark.drop("column_name")
+    - add column                            - dataframe.withColumn("new_column_name", some mathematical operation)
+    - drop column                           - dataframe.drop("column_name")
 
 5) RENAME COLUMN 
-    - rename                                - df_pyspark.withColumnRenamed("old_name", "new_name")
+    - rename                                - dataframe.withColumnRenamed("old_name", "new_name")
 
 6) HANDLING MISSING VALUES
-    - 
+    - dropping columns                      - dataframe.drop("column_name")
+    - replacing null values                 - dataframe.na.drop/fill/replace
+                                            - dataframe.na.drop(how="any", tresh=None, subset=None)  -> it will delete all rows which contains null values
+                                                                                                     -> how = "any" or "all" --- all means it will delete only rows with all nulls 
+                                                                                                     -> tresh = 2 -- at least 2 null values needs to be presented for row delete
+                                                                                                     -> subset = ["column_name"] --- delete rows where named column contains null 
+                                            - dataframe.na.fill("Missing value", ["col_1", "col_2"]) 
+                                            - dataframe.na.replace()
+    - using imputer (mean, avarage.. replace)
+                                            - from pyspark.ml.feature import Imputer 
+                                            - imputer = Imputer(
+                                                inpuCols=["age", "experience", "salary"],
+                                                outputCols=["{}_imputed".format(c) for c in ["age", "experience", "salary"]]
+                                            ).setStrategy("mean")
+                                            - imputer.fit(dataframe).transform(dataframe).show()
